@@ -1,0 +1,18 @@
+* {box-sizing: border-box}
+
+.container_change {
+  width: 100%;
+  background-color: rgba(33, 93, 150, 0.178);
+}
+
+.skills_change {
+  text-align: right;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+
+.html {width: 90%; background-color: #04aa6dbb;}
+.css {width: 80%; background-color: #2195f3c0;}
+.js {width: 65%; background-color: #974e49b7;}
+.php {width: 60%; background-color: #13929bb6;}

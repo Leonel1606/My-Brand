@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Db test</title>
+    <link rel="stylesheet" href="./blogs.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-25">
+            <label for="fname">Blog title</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="Titlebox" name="titleBlob" placeholder="Blog title..">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="lname">Blog Descruption Image</label>
+          </div>
+          <div class="col-75">
+            <input type="file" id="img" name="image" placeholder="Write your Post..">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="country">Post date</label>
+          </div>
+          <div class="col-75">
+            
+
+            <input type="date" id="start" name="trip-start"
+                value="2023-01-01"
+                min="2018-01-01" max="2023-12-31">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="subject">Subject</label>
+          </div>
+          <div class="col-75">
+            <textarea id="Postbox" name="post" placeholder="Write something.." style="height:200px"></textarea>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <!-- <input type="submit" value="Post" id="postBtn"> -->
+          <button id="Insbtn">+ New Blog</button>
+        </div>
+      </div>
+  
+    <!-- ----------------IMPORT + CONFIGURATION SECTION--------------------------------- -->
+    <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCH-rRMi42mEFOY7AbZgxsRkqrXBI3wkY8",
+    authDomain: "fire9db-ebc8e.firebaseapp.com",
+    projectId: "fire9db-ebc8e",
+    storageBucket: "fire9db-ebc8e.appspot.com",
+    messagingSenderId: "96832741949",
+    appId: "1:96832741949:web:5a1c7c3556b3968a898054"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  import {
+    getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField
+  } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js"
+
+  const db = getFirestore();
+
+
+
+  // ------------------------------------REFERENCES -------------------------------------------------
+  let TitleBox = document.getElementById("Titlebox");
+  let PostBox = document.getElementById("Postbox");
+  let PostDate = document.getElementById("start");
+
+  let PostBtn = document.getElementById("Insbtn");
+
+//   ADDING DOCUMENT------------------------------------------------------------
+
+async function AddNewBlog_AutoID(){
+    var ref = collection(db, 'blogs');
+
+    const docRef = await addDoc(ref, {
+        BlogTitle: TitleBox.value,
+        BlogPost: PostBox.value,
+        BlogDate: PostDate.value,
+
+    })
+    .then(() =>{
+        alert("Data inserted Successfully");
+    })
+    .catch((error) =>{
+        alert("unSuccessfull operation, errro " + error);
+    })
+    console.log('document id is: '+ docRef.id);
+}
+PostBtn.addEventListener('click', AddNewBlog_AutoID); 
+
+</script>
+    
+</body>
+</html>
